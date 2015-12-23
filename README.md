@@ -223,7 +223,7 @@ Please see the file LICENSE.
 
 
 ## Contacts
-o If you want to be informed about new code releases, bug fixes, security fixes, general news and information about the White Market Games project just keep tracking this repository.
+o If you want to be informed about new code releases, bug fixes, security fixes, general news and information about the White Market Games project or this configurations just keep tracking this repository.
 
 o If you want freely available support for this script or any kind of help just mail hugophp@sapo.pt
 
