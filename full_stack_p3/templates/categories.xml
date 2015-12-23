@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<whitemarketgames>
+    {% for c in categories %}
+    <category>
+        <name>{{ c.name }}</name>
+        <id>{{ c.id }}</id>
+        <items>
+            {% for i in items %}
+            {% if i.category_id == c.id %}
+            <item>
+                <title>{{i.title}}</title>
+                <description>{{i.description}}</description>
+                <price>{{i.price}}</price>
+                <picture>{{i.picture}}</picture>
+            </item>
+            {% endif %}
+            {% endfor %}
+        </items>
+    </category>
+    {% endfor %}
+</whitemarketgames>

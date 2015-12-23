@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<item>
+    <title>{{item.title}}</title>
+    <description>{{item.description}}</description>
+    <price>{{item.price}}</price>
+    <picture>{{item.picture}}</picture>
+</item>

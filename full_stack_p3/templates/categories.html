@@ -1,0 +1,70 @@
+{% extends "main.html" %}
+{% block content %}
+
+<hr>
+
+{% with messages = get_flashed_messages() %}
+
+  {% if messages %}
+    <div class="alert alert-success alert-dismissible" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      <ul>
+        {% for message in messages %}
+            <li style="list-style:none"><span class="glyphicon glyphicon-ok-sign" aria-hidden="true"></span> {{ message }} </li>
+        {% endfor %}
+        </ul>
+    </div>
+    
+    {% endif %}
+{% endwith %}
+
+<div class="row">
+
+            <div class="col-md-3">
+                <div class="list-group">
+                <a href="{{url_for('showCategories') }}" class="list-group-item {% if category_id == -1 %}active{% endif %}">All</a>
+                {% for category in categories %}
+                    <a href="{{url_for('showItems', category_id = category.id) }}" class="list-group-item {% if category_id == category.id %}active{% endif %}">{{category.name}}</a>
+                {% endfor %}
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                {% if 'username' in session %}
+                <div class="row">
+                    <div class="col-md-12 text-right" style="margin: 20px 0"><a href="{{url_for('newItem')}}" class="btn btn-info"><span class="glyphicon glyphicon-plus-sign" aria-hidden="true"></span> New Item</a></div>
+                </div>
+                {% endif %}
+                <div class="row">
+
+                {% set aux = 1 %}
+                    {% for item in items %}
+
+                        <div class="col-sm-4 col-lg-4 col-md-4">
+                            <div class="thumbnail">
+                                <img src="{{item.picture}}" alt="{{item.title}}">
+                                <div class="caption">
+                                    <h4 class="pull-right">{{item.price}}</h4>
+                                    <h4>{{item.title}}</h4>
+                                    <p>{{item.description}}</p>
+                                </div>
+                                {% if session.user_id == item.user_id %}
+                                <p class="text-center">
+                                    <a href="{{url_for('editItem', category_id = item.category_id, item_id=item.id ) }}" class="btn btn-primary"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Edit Game</a> <a href="{{url_for('deleteItem', category_id = item.category_id, item_id=item.id ) }}" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Delete</a>
+                                </p>
+                                {% endif %}
+                                <p class="text-right"><a href="{{url_for('itemJSON', item_id=item.id ) }}" target="_blank" style="color:#999">JSON</a> | <a href="{{url_for('itemXML', item_id=item.id ) }}" target="_blank" style="color:#999">XML</a></p>
+                            </div>
+                        </div>
+                        {% if aux % 3 == 0 %}
+                        <div class="clearfix visible-md-block visible-lg-block visible-sm-block"></div>
+                        {% endif %}
+                        {% set aux = aux + 1 %}
+                    {% endfor %}
+
+                </div>
+
+            </div>
+
+        </div>
+{% endblock %}

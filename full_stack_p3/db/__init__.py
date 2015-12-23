@@ -1,0 +1,2 @@
+# Child modules
+import setup
